@@ -7,6 +7,10 @@
 
 Este é o repositório do meu portfólio profissional, uma Single Page Application (SPA) moderna, interativa e responsiva construída para expor minha trajetória, habilidades e projetos de desenvolvimento.
 
+## 🌐 Acesso em Produção (Live Site)
+Se você não deseja baixar e rodar o código localmente, acesse a versão completa hospedada na web:  
+👉 **[nikolasdev.com.br](https://nikolasdev.com.br)**
+
 ## ✨ Funcionalidades Principais
 
 - **Navegação Suave (Smooth Scroll):** Menu *sticky* com navegação in-page fluida.
