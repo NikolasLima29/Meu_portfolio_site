@@ -6,9 +6,10 @@ import { FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
 const Contato = () => {
   const [copied, setCopied] = useState(false);
   const website = "nikolasdev.com.br";
+  const email = "nikolas.lima.dev@gmail.com";
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`https://${website}`);
+    navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -53,13 +54,13 @@ const Contato = () => {
               </div>
               
               <div style={{ background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>{website}</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>{email}</span>
                 <Button 
                   onClick={handleCopy}
                   variant={copied ? "success" : "outline-light"}
                   size="sm"
                 >
-                  {copied ? "Link Copiado!" : "Copiar Link"}
+                  {copied ? "Email Copiado!" : "Copiar Email"}
                 </Button>
               </div>
             </motion.div>
