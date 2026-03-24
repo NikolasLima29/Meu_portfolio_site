@@ -1,0 +1,354 @@
+@import url('../../Fonte_Config/fonte_geral.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-color: white;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #c40000;
+    color: white;
+}
+
+header .logo img {
+    height: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    margin-left: 40px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+header nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+header nav ul li a {
+    color: white;
+    font-size: 25px;
+    text-decoration: none !important;
+}
+
+.carrinho {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.carrinho img {
+    height: 25px;
+}
+
+nav ul li a:not(.btn):after {
+    content: "";
+    background-color: #ffffff;
+    height: 3px;
+    width: 0%;
+    display: block;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: white;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+#sobre_nos {
+    color: black;
+    text-align: center;
+    font-size: 54px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.container {
+    align-content: left;
+
+}
+
+#imagem {
+    height: 440px;
+    width: 680px;
+    padding-bottom: 20px;
+    display: block;
+    margin: auto;
+
+}
+
+.carousel {
+    width: 40%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+
+/* Menu hambúrguer */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Estilo padrão (desktop) */
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    header .logo img {
+    height: 60px;
+}
+
+    nav.nav-links {
+        display: flex !important;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    #icone-usuario {
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Ordem dos elementos */
+    .logo {
+        order: 1;
+    }
+
+    .carrinho {
+        order: 2 !important;
+        margin: 0;
+        width: auto !important;
+        display: flex;
+        align-items: center;
+    }
+
+    #icone-usuario {
+    order: 3;
+    margin-left: 8px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+    .menu-toggle {
+        order: 4 !important;
+        display: block !important;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    /* Menu dropdown */
+    .nav-links {
+        order: 4;
+        display: none;
+        width: 100%;
+        background-color: #c40000;
+        padding: 10px 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+        min-height: calc(10vh - 30px);
+    }
+
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        gap: 15px;
+        list-style: none;
+    }
+
+    .nav-links ul li a {
+        font-size: 20px;
+        color: white;
+    }
+
+    #mobile-search-wrapper {
+        order: 5;
+        width: 100%;
+        display: block;
+        z-index: 0 !important;
+        position: relative;
+    }
+
+    #bem-vindo {
+        order: 6;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .pagination {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .pagination .page-item {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+    }
+
+    .pagination .page-link {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        white-space: nowrap;
+        border-radius: 8px;
+    }
+
+    .pagination .page-item:first-child .page-link,
+    .pagination .page-item:last-child .page-link {
+        width: auto !important;
+        padding: 0 10px !important;
+    }
+
+    nav .pagination {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: center !important;
+    }
+    
+    nav.nav-links form {
+        display: none !important;
+    }
+}
+
+/* Remover o fundo separado (vai ficar dentro do header) */
+#mobile-search-wrapper {
+    display: none;
+    width: 100%;
+    padding: 10px 10px 0 10px;
+}
+
+/* Mostrar somente no mobile */
+@media (max-width: 768px) {
+
+    #mobile-search-wrapper form {
+        display: flex;
+        width: 100%;
+    }
+
+    #mobile-search-wrapper input {
+        border-radius: 6px;
+    }
+
+    /* esconder pesquisa desktop no menu mobile */
+    
+}
+
+/* Compact mobile nav: reduzir espaçamento entre itens e esconder o form duplicado dentro do nav */
+@media (max-width: 768px) {
+    /* reduz o espaçamento vertical entre itens do menu */
+    nav.nav-links ul {
+        gap: 6px !important;
+    }
+
+    /* Esconde o form que fica dentro do <nav> (a busca já existe em #mobile-search-wrapper) */
+    nav.nav-links ul li form,
+    nav.nav-links ul li form * {
+        display: none !important;
+    }
+
+    /* Mais compactos: remover margens/paddings extras */
+    nav.nav-links ul li {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    nav.nav-links ul li a {
+        padding: 6px 0 !important;
+        line-height: 1.1 !important;
+        font-size: 20px !important;
+    }
+
+    nav.nav-links {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+    }
+
+    .card .badge,
+    #categorias_filtro .badge {
+        font-size: 0.60rem !important;
+        padding: 3px 6px !important;
+        border-radius: 8px !important;
+        line-height: 1 !important;
+    }
+}

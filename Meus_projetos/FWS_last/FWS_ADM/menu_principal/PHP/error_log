@@ -1,0 +1,68 @@
+[09-Dec-2025 06:42:47 America/Fortaleza] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php:45
+Stack trace:
+#0 /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php(45): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'FWS')
+#1 {main}
+  thrown in /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php on line 45
+[09-Dec-2025 08:59:29 America/Fortaleza] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php:45
+Stack trace:
+#0 /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php(45): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'FWS')
+#1 {main}
+  thrown in /home3/quaiat07/public_html/fws/FWS_ADM/menu_principal/PHP/api_chat_gemini.php on line 45
+[09-Dec-2025 09:01:35 America/Fortaleza] Response received: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[09-Dec-2025 09:01:55 America/Fortaleza] Response received: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[09-Dec-2025 09:05:39 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Sou seu assistente FWS (Faster Way Service) e estou pronto para ajudar!\n\nAqui está um res
+[09-Dec-2025 09:48:20 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Seja bem-vindo(a) ao seu assistente FWS! Estou pronto para te ajudar.\n\nAqui está um rápi
+[09-Dec-2025 11:49:14 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Sou seu assistente FWS, pronto para ajudar!\n\nAtualmente, o sistema está operando muito be
+[09-Dec-2025 12:29:13 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Sou seu assistente IA do sistema FWS (Faster Way Service)! ✨\n\nEstou aqui para te ajudar 
+[09-Dec-2025 13:57:56 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Que bom te ver por aqui!\n\nEstou pronto para te ajudar com as informações do sistema FWS!
+[31-Dec-2025 00:11:33 America/Fortaleza] Response received: {
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Olá! 👋 Sim, temos uma variedade de opções de água registradas em nossas vendas recentes! 💧\n\

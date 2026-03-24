@@ -1,0 +1,471 @@
+<?php
+include "../../conn.php";
+
+session_start();
+
+// Verifica login
+if (!isset($_SESSION['usuario_id_ADM'])) {
+    header("Location: ../../index.html?status=erro&msg=Faça login primeiro");
+    exit;
+}
+
+$id = $_SESSION['usuario_id_ADM'];
+
+// Busca nome do ADM
+$stmt = $sql->prepare("SELECT nome FROM funcionarios WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$stmt->bind_result($nome_adm);
+$stmt->fetch();
+$stmt->close();
+
+// Sobrescreve o nome para conter apenas o primeiro nome
+$nome_adm = explode(" ", trim($nome_adm))[0];
+
+/* ============================================================
+   PROTEÇÃO DE LOGIN
+   ============================================================ */
+if (!isset($_SESSION['usuario_id_ADM'])) {
+    header("Location: ../../index.html?status=erro&msg=Faça login primeiro");
+    exit;
+}
+
+$id = $_SESSION['usuario_id_ADM'];
+
+/* ============================================================
+   CARREGAR DADOS DO FUNCIONÁRIO (para navbar)
+   ============================================================ */
+$stmt = $sql->prepare("SELECT nome, cpf, email, nivel_permissao FROM funcionarios WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$stmt->bind_result($nome, $cpf, $email, $nivel);
+$stmt->fetch();
+$stmt->close();
+
+function nivel($n) {
+    return $n == 1 ? "Atendente" : "Gerente";
+}
+
+
+/* ============================================================
+   PROCESSAR EXCLUSÃO
+   ============================================================ */
+if (isset($_GET['delete'])) {
+    $id_delete = intval($_GET['delete']);
+    $sql->query("DELETE FROM despesas WHERE id = $id_delete");
+
+    header("Location: despesas.php?status=sucesso&msg=Despesa excluída!");
+    exit;
+}
+
+/* ============================================================
+   PROCESSAR CADASTRO OU EDIÇÃO
+   ============================================================ */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $id_edit      = intval($_POST['id_edit'] ?? 0);
+    $data_despesa = trim($_POST['data_despesa'] ?? '');
+    $tipo         = trim($_POST['tipo'] ?? '');
+    $valor        = trim($_POST['valor'] ?? '');
+    $descricao    = trim($_POST['descricao'] ?? '');
+
+    // Converter valor
+    if ($valor !== "") {
+        $valor = str_replace('.', '', $valor);
+        $valor = str_replace(',', '.', $valor);
+        $valor = floatval($valor);
+    }
+
+    if ($data_despesa === "" || $tipo === "" || $valor === "") {
+        header("Location: despesas.php?status=erro&msg=Preencha todos os campos obrigatórios!");
+        exit;
+    }
+
+    if ($id_edit > 0) {
+        $stmt = $sql->prepare("UPDATE despesas SET data_despesa=?, tipo=?, valor=?, descricao=? WHERE id=?");
+        $stmt->bind_param("ssdsi", $data_despesa, $tipo, $valor, $descricao, $id_edit);
+        $stmt->execute();
+        $stmt->close();
+        header("Location: despesas.php?status=sucesso&msg=Despesa atualizada!");
+        exit;
+
+    } else {
+        $stmt = $sql->prepare("INSERT INTO despesas (data_despesa, tipo, valor, descricao)
+                               VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssds", $data_despesa, $tipo, $valor, $descricao);
+        $stmt->execute();
+        $stmt->close();
+        header("Location: despesas.php?status=sucesso&msg=Despesa registrada!");
+        exit;
+    }
+}
+
+/* ============================================================
+   BUSCAR DADOS PARA EDIÇÃO
+   ============================================================ */
+$edit_item = null;
+if (isset($_GET['edit'])) {
+    $id_edit = intval($_GET['edit']);
+    $res = $sql->query("SELECT * FROM despesas WHERE id=$id_edit");
+    $edit_item = $res->fetch_assoc();
+}
+
+$pagina = 'financeiro';
+
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Controle de Despesas</title>
+<link rel="icon" type="image/x-icon" href="../../logotipo.png">
+  <link rel="stylesheet" href="../../menu_principal/CSS/menu_principal.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<style>
+    @import url('../../Fonte_Config/fonte_geral.css');
+/* ======== DESIGN PADRÃO DO SISTEMA ======== */
+
+body {
+    background-color: #fff8e1;
+    margin: 0;
+}
+
+#fund {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: black !important;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+    #texto {
+        text-align: center;
+        font-size: 80px;
+        height: 140px;
+    }
+
+    #menu {
+        background-color: black;
+    }
+
+    #fund {
+        background-color: black !important;
+    }
+
+    #cor-fonte {
+        color: #ff9100;
+        font-size: 21px;
+        padding-bottom: 13px;
+    }
+
+    #cor-fonte img{
+        width: 32px;
+    }
+
+    #cor-fonte:hover {
+        background-color: #f4a21d67 !important;
+    }
+
+    #logo-linha img {
+        width: 150px;
+    }
+
+    .nav-link {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+    }
+
+    .nav-link.active {
+        background-color: #f4a21d67 !important;
+        border-radius: 5px;
+    }
+
+#conteudo-principal {
+    margin-left: 250px;
+    padding: 40px;
+}
+
+/* Formulário */
+.container-box {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ff9100;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #f4a01d;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Botões */
+.btn-primary {
+    background-color: #52c41a;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #3a8a14;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #d11b1b;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Lista */
+.item-despesa {
+    padding: 12px;
+    border: 2px solid #f4a01d;
+    border-radius: 8px;
+    background: #fff4d0;
+    margin-bottom: 12px;
+}
+
+.edit-btn, .delete-btn {
+    font-size: 14px;
+    padding: 4px 10px;
+    color: white;
+}
+
+.edit-btn { background:#ff9100; }
+.delete-btn { background:#d11b1b; }
+
+/* Animações e estilo de botão semelhante ao lista_funcionarios.php */
+.btn-voltar,
+.btn-cadastrar {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    transition: all .2s ease;
+    color: white;
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.btn-voltar { background-color: #e68000; }
+
+.btn-voltar:hover,
+.btn-cadastrar:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(255, 138, 0, 0.4);
+}
+
+.btn-voltar.small { padding:5px 10px; font-size:0.85rem; border-radius:4px; }
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+        <div class="row flex-nowrap">
+
+            <!-- NAVBAR -->
+            <div class="col-auto px-sm-2 px-0 bg-dark" id="fund">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+                    id="menu">
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+                        <li id="logo-linha"><img src="../../menu_principal/IMG/logo_linhas.png"></li>
+
+                        <li class="nav-item">
+                            <a href="/fws/FWS_ADM/menu_principal/HTML/menu_principal1.php"
+                                class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/painelgeral.png">
+                                <span class="ms-1 d-none d-sm-inline">Painel Geral</span>
+                            </a>
+                        </li>
+
+                        <li><a href="/fws/FWS_ADM/fast_service/HTML/fast_service.php" class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/fastservice.png">
+                                <span class="ms-1 d-none d-sm-inline">Fast Service</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/menu_financeiro/HTML/menu_financeiro.php" class="nav-link align-middle px-0 <?php if($pagina=='financeiro') echo 'active'; ?>" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/financeiro.png">
+                                <span class="ms-1 d-none d-sm-inline">Financeiro</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/menu_vendas/HTML/menu_venda.php" class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/vendaspai.png">
+                                <span class="ms-1 d-none d-sm-inline">Vendas</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/estoque/HTML/estoque.php" class="nav-link align-middle px-0"
+                                id="cor-fonte">
+                                <img src="../../menu_principal/IMG/estoque.png">
+                                <span class="ms-1 d-none d-sm-inline">Estoque</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/produtos/HTML/lista_produtos.php"
+                                class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/produtos.png">
+                                <span class="ms-1 d-none d-sm-inline">Produtos</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/fornecedores/HTML/lista_fornecedores.php"
+                                class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/fornecedor.png">
+                                <span class="ms-1 d-none d-sm-inline">Fornecedores</span>
+                            </a></li>
+
+                        <li><a href="/fws/FWS_ADM/funcionarios/HTML/menu_funcionarios.php" class="nav-link align-middle px-0" id="cor-fonte">
+                                <img src="../../menu_principal/IMG/funcionarios.png">
+                                <span class="ms-1 d-none d-sm-inline">Funcionários</span>
+                            </a></li>
+                    </ul>
+
+                    <hr>
+
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown">
+                            <img src="../../fotodeperfiladm.png" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1"><?= $nome_adm ?></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark shadow">
+                            <li><a class="dropdown-item" href="../../perfil/HTML/perfil.php">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../../perfil/HTML/logout.php">Sair</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="col py-3" id="conteudo-principal">
+
+            <div class="container-box">
+                <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px; justify-content:space-between;">
+                    <a href="menu_financeiro.php" class="btn-voltar">← Voltar</a>
+                    <h2 style="margin:0; flex:1; text-align:center;"><?= $edit_item ? "Editar Despesa" : "Registrar Despesa" ?></h2>
+                    <div style="width:120px;"></div>
+                </div>
+
+                <!-- ALERTA -->
+                <?php if(isset($_GET['status'])): ?>
+                    <div class="alert <?= $_GET['status']=="erro" ? "alert-danger" : "alert-success" ?>">
+                        <?= htmlspecialchars($_GET['msg']) ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- FORMULÁRIO -->
+                <form method="POST" id="form-despesa">
+
+                    <input type="hidden" name="id_edit" value="<?= $edit_item['id'] ?? 0 ?>">
+
+                    <label>Data *</label>
+                    <input type="date" name="data_despesa" required
+                           value="<?= $edit_item['data_despesa'] ?? '' ?>">
+
+                    <label>Tipo *</label>
+                    <select name="tipo" required>
+                        <option value="">Selecione...</option>
+                        <?php
+                        $tipos = ['manutencao','agua','luz','internet','outros'];
+                        foreach($tipos as $t){
+                            $sel = ($edit_item && $edit_item['tipo']==$t) ? "selected" : "";
+                            echo "<option value='$t' $sel>".ucfirst($t)."</option>";
+                        }
+                        ?>
+                    </select>
+
+                    <label>Valor *</label>
+                    <input type="text" name="valor" id="valor"
+                           value="<?= isset($edit_item['valor']) ? number_format($edit_item['valor'],2,",",".") : "" ?>"
+                           required>
+
+                    <label>Descrição</label>
+                    <textarea name="descricao" rows="4"><?= $edit_item['descricao'] ?? "" ?></textarea>
+
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary w-50" id="cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary w-50">
+                            <?= $edit_item ? "Salvar Alterações" : "Registrar" ?>
+                        </button>
+                    </div>
+
+                </form>
+
+                <hr>
+
+                <h3 class="mt-4">Despesas Registradas</h3>
+
+                <?php
+                $res = $sql->query("SELECT * FROM despesas ORDER BY data_despesa DESC, id DESC");
+                while($d = $res->fetch_assoc()):
+                ?>
+                <div class="item-despesa">
+                    <strong><?= date("d/m/Y", strtotime($d["data_despesa"])) ?></strong><br>
+                    Tipo: <?= ucfirst($d["tipo"]) ?><br>
+                    Valor: <strong>R$ <?= number_format($d["valor"],2,",",".") ?></strong><br>
+
+                    <?php if ($d["descricao"] != ""): ?>
+                        <em><?= htmlspecialchars($d["descricao"]) ?></em><br>
+                    <?php endif; ?>
+
+                    <div class="mt-2 d-flex gap-2">
+                        <a href="despesas.php?edit=<?= $d['id'] ?>" class="btn edit-btn">Editar</a>
+                        <a href="despesas.php?delete=<?= $d['id'] ?>" class="btn delete-btn"
+                           onclick="return confirm('Excluir esta despesa?')">Excluir</a>
+                    </div>
+                </div>
+
+                <?php endwhile; ?>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+// Máscara de valor
+$("#valor").mask("#.##0,00", { reverse: true });
+
+// CANCELAR → limpa tudo
+$("#cancelar").click(function () {
+    $("#form-despesa")[0].reset();
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+<?php $sql->close(); ?>
