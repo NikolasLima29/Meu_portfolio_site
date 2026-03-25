@@ -33,11 +33,11 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto" style={{ gap: '1rem', alignItems: 'center' }}>
-            <Nav.Link as={Link} to="home" smooth={true} duration={500} style={{ cursor: 'pointer', color: '#ffffff' }}>{t('navbar.home')}</Nav.Link>
-            <Nav.Link as={Link} to="sobre" smooth={true} duration={500} style={{ cursor: 'pointer', color: '#ffffff' }}>{t('navbar.sobre')}</Nav.Link>
-            <Nav.Link as={Link} to="habilidades" smooth={true} duration={500} style={{ cursor: 'pointer', color: '#ffffff' }}>{t('navbar.habilidades')}</Nav.Link>
-            <Nav.Link as={Link} to="projetos" smooth={true} duration={500} style={{ cursor: 'pointer', color: '#ffffff' }}>{t('navbar.projetos')}</Nav.Link>
-            <Nav.Link as={Link} to="contato" smooth={true} duration={500} style={{ cursor: 'pointer', color: '#ffffff' }}>{t('navbar.contato')}</Nav.Link>
+            <Nav.Link as={Link} to="home" smooth={true} duration={500} className="nav-link-custom" style={{ cursor: 'pointer' }}>{t('navbar.home')}</Nav.Link>
+            <Nav.Link as={Link} to="sobre" smooth={true} duration={500} className="nav-link-custom" style={{ cursor: 'pointer' }}>{t('navbar.sobre')}</Nav.Link>
+            <Nav.Link as={Link} to="habilidades" smooth={true} duration={500} className="nav-link-custom" style={{ cursor: 'pointer' }}>{t('navbar.habilidades')}</Nav.Link>
+            <Nav.Link as={Link} to="projetos" smooth={true} duration={500} className="nav-link-custom" style={{ cursor: 'pointer' }}>{t('navbar.projetos')}</Nav.Link>
+            <Nav.Link as={Link} to="contato" smooth={true} duration={500} className="nav-link-custom" style={{ cursor: 'pointer' }}>{t('navbar.contato')}</Nav.Link>
             
             {/* Language Toggle Dropdown */}
             <div 

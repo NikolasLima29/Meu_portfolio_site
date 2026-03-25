@@ -1,1 +1,27 @@
 /* Arquivo limpo para não conflitar com Bootstrap e animations.css */
+
+.nav-link-custom {
+  color: #ffffff !important;
+  position: relative;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover {
+  color: var(--primary) !important;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}
