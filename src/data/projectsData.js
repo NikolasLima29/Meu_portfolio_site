@@ -10,7 +10,7 @@ export const projectsData = [
     },
     techs: ["HTML", "CSS", "JS", "PHP", "MySQL", "Bootstrap"],
     github: "https://github.com/NikolasLima29/TCC_FWS",
-    demo: "/Meus_projetos/FWS_last/index.php",
+    demo: "/fws-demo",
     nature: { pt: "TCC Acadêmico", en: "Academic Capstone", es: "TCC Académico" },
     fullDescription: {
       pt: `Desenvolvemos o FWS (Faster Way Service) como TCC de conclusão do Ensino Médio Técnico em Desenvolvimento de Sistemas. É um sistema web de <strong>"Peça e Retire"</strong> para a Shell Select Jardim América, dividido em dois módulos principais:

@@ -1,6 +1,11 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  
+  # Mascaramento de rotas para Projetos (Demo URLs Limpas)
+  RewriteRule ^fws-demo/?$ Meus_projetos/FWS_last/index.php [L]
+
+  # Rotas padrão do React SPA
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
