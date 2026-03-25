@@ -3,8 +3,10 @@ import { Row, Col, Carousel } from 'react-bootstrap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { timelineData } from '../data/timelineData';
 import '../styles/animations.css';
+import { useTranslation } from 'react-i18next';
 
 const TimelineItem = ({ item, index }) => {
+  const { i18n } = useTranslation();
   return (
     <Row className="mb-5 mx-0 align-items-center" style={{ position: 'relative', zIndex: 1 }}>
       {/* Marcador no centro */}
@@ -42,11 +44,11 @@ const TimelineItem = ({ item, index }) => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h3 style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '2rem', marginBottom: item.subtitulo ? '0.2rem' : '0.5rem' }}>{item.year}</h3>
+          <h3 style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '2rem', marginBottom: item.subtitulo ? '0.2rem' : '0.5rem' }}>{item.year[i18n.language]}</h3>
           {item.subtitulo && (
-            <h2 style={{ color: '#87CEFA', fontWeight: 600, fontSize: '1.4rem', marginBottom: '1rem' }}>{item.subtitulo}</h2>
+            <h2 style={{ color: '#87CEFA', fontWeight: 600, fontSize: '1.4rem', marginBottom: '1rem' }}>{item.subtitulo[i18n.language]}</h2>
           )}
-          <p style={{ color: 'var(--text-light)', fontSize: '1rem', whiteSpace: 'pre-line' }}>{item.text}</p>
+          <p style={{ color: 'var(--text-light)', fontSize: '1rem', whiteSpace: 'pre-line' }}>{item.text[i18n.language]}</p>
         </motion.div>
       </Col>
     </Row>

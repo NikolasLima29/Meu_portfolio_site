@@ -1,0 +1,47 @@
+{
+  "navbar": {
+    "home": "Home",
+    "sobre": "Sobre Mim",
+    "habilidades": "Tecnologias e Habilidades",
+    "projetos": "Projetos",
+    "contato": "Contato"
+  },
+  "home": {
+    "greeting": "Olá, sou Nikolas Lima! Bem-vindo ao meu portfólio!",
+    "typewriter": [
+      "Desenvolvedor de Software",
+      "Estudante de Engenharia de Software no IFSP",
+      "Focando em construir interfaces modernas",
+      "Entusiasta de React.js e Animações"
+    ],
+    "cta": "Ver Projetos"
+  },
+  "sobre": {
+    "title": "Sobre Mim",
+    "description": "Minha jornada na tecnologia através dos anos. Um resumo das minhas experiências, estudos e conquistas profissionais organizadas na linha do tempo."
+  },
+  "habilidades": {
+    "title": "Tecnologias / Habilidades",
+    "pratica": "Mais prática",
+    "contato": "Contato inicial ou teórico"
+  },
+  "projetos": {
+    "title": "Meus Projetos",
+    "github_all": "Ver todos no GitHub",
+    "demo": "Ver Demonstração",
+    "github": "Acessar GitHub",
+    "about": "Sobre o Projeto",
+    "dev": "Desenvolvimento",
+    "hide": "Ocultar Detalhes",
+    "more": "Ver mais sobre o projeto"
+  },
+  "contato": {
+    "title": "Contato",
+    "description": "Estou sempre aberto a novas oportunidades e conexões. Me mande uma mensagem!",
+    "copy": "Copiar Email",
+    "copied": "Email Copiado!"
+  },
+  "footer": {
+    "credit": "Desenvolvido por Nikolas Lima com React, Vite e Framer Motion."
+  }
+}

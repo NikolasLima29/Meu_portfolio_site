@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const Contato = () => {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const website = "nikolasdev.com.br";
   const email = "nikolas.lima.dev@gmail.com";
@@ -24,10 +26,10 @@ const Contato = () => {
            transition={{ duration: 0.6 }}
            className="text-center mb-5"
         >
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>Contato</h2>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>{t('contato.title')}</h2>
           <div style={{ width: '60px', height: '4px', background: 'var(--secondary)', margin: '0 auto', borderRadius: '2px' }}></div>
           <p style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
-            Estou sempre aberto a novas oportunidades e conexões. Me mande uma mensagem!
+            {t('contato.description')}
           </p>
         </motion.div>
 
@@ -60,7 +62,7 @@ const Contato = () => {
                   variant={copied ? "success" : "outline-light"}
                   size="sm"
                 >
-                  {copied ? "Email Copiado!" : "Copiar Email"}
+                  {copied ? t('contato.copied') : t('contato.copy')}
                 </Button>
               </div>
             </motion.div>

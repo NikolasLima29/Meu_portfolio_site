@@ -1,0 +1,47 @@
+{
+  "navbar": {
+    "home": "Home",
+    "sobre": "About Me",
+    "habilidades": "Tech & Skills",
+    "projetos": "Projects",
+    "contato": "Contact"
+  },
+  "home": {
+    "greeting": "Hi, I'm Nikolas Lima! Welcome to my portfolio!",
+    "typewriter": [
+      "Software Developer",
+      "Software Engineering Student at IFSP",
+      "Focused on building modern interfaces",
+      "React.js & Animations Enthusiast"
+    ],
+    "cta": "View Projects"
+  },
+  "sobre": {
+    "title": "About Me",
+    "description": "My journey in technology over the years. A summary of my experiences, studies, and professional achievements organized on a timeline."
+  },
+  "habilidades": {
+    "title": "Tech Stack / Skills",
+    "pratica": "Most Practiced",
+    "contato": "Initial or Theoretical Contact"
+  },
+  "projetos": {
+    "title": "My Projects",
+    "github_all": "See all on GitHub",
+    "demo": "Live Demo",
+    "github": "View GitHub",
+    "about": "About the Project",
+    "dev": "Development",
+    "hide": "Hide Details",
+    "more": "Learn more about this project"
+  },
+  "contato": {
+    "title": "Contact",
+    "description": "I'm always open to new opportunities and connections. Send me a message!",
+    "copy": "Copy Email",
+    "copied": "Email Copied!"
+  },
+  "footer": {
+    "credit": "Developed by Nikolas Lima natively with React, Vite and Framer Motion."
+  }
+}
