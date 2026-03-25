@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Arquivo de configuracao de banco de dados FWS ignorado por seguranca
+Meus_projetos/FWS_last/config.php

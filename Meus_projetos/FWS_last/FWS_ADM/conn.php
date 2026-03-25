@@ -1,5 +1,6 @@
 <?php
-    $sql =  new mysqli("162.241.2.71", "quaiat07_fws", "JO@O_M@TH_1234", "quaiat07_fws");
+    require_once __DIR__ . '/../config.php';
+    $sql =  new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     $sql->set_charset("utf8");
 
     if ($sql->connect_error) {

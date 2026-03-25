@@ -1,8 +1,9 @@
 <?php
 // Cria a conexão com o banco de dados
-//$conn = new mysqli("localhost", "root", "", "FWS");
+// $conn = new mysqli("localhost", "root", "", "FWS");
 
-$conn = new mysqli("162.241.2.71", "quaiat07_fws", "JO@O_M@TH_1234", "quaiat07_fws");
+require_once __DIR__ . '/../config.php';
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 
 // Verifica se houve erro na conexão

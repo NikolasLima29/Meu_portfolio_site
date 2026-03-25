@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Copiando estrutura do banco de dados para quaiat07_fws
-CREATE DATABASE IF NOT EXISTS `quaiat07_fws` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `quaiat07_fws`;
+-- Copiando estrutura do banco de dados para if0_41348689_fws /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `if0_41348689_fws`;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- Copiando estrutura para tabela quaiat07_fws.carrinho
+-- Copiando estrutura para tabela if0_41348689_fws.carrinho
 CREATE TABLE IF NOT EXISTS `carrinho` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.carrinho: ~13 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.carrinho: ~13 rows (aproximadamente)
 INSERT INTO `carrinho` (`id`, `usuario_id`, `produto_id`, `quantidade`, `preco_unitario`, `codigo_cupom`, `data_criacao`) VALUES
 	(8, 9, 9, 3, 6.50, NULL, '2025-10-23 22:27:10'),
 	(171, 12, 9, 1, 6.50, NULL, '2025-12-09 12:31:41'),
@@ -51,7 +51,7 @@ INSERT INTO `carrinho` (`id`, `usuario_id`, `produto_id`, `quantidade`, `preco_u
 	(286, 4, 86, 9, 2.99, NULL, '2025-12-31 00:10:11'),
 	(297, 16, 6, 1, 6.50, NULL, '2026-02-15 02:48:35');
 
--- Copiando estrutura para tabela quaiat07_fws.categorias
+-- Copiando estrutura para tabela if0_41348689_fws.categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   UNIQUE KEY `nome` (`nome`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.categorias: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.categorias: ~11 rows (aproximadamente)
 INSERT INTO `categorias` (`id`, `nome`, `cor`) VALUES
 	(1, 'BEBIDAS ALCOÓLICAS', '#8B0000'),
 	(2, 'BEBIDAS NÃO ALCOÓLICAS', '#1E90FF'),
@@ -74,7 +74,7 @@ INSERT INTO `categorias` (`id`, `nome`, `cor`) VALUES
 	(10, 'SALGADOS', '#ceaf00ff'),
 	(11, 'OUTROS', '#A9A9A9');
 
--- Copiando estrutura para tabela quaiat07_fws.cupom
+-- Copiando estrutura para tabela if0_41348689_fws.cupom
 CREATE TABLE IF NOT EXISTS `cupom` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
@@ -82,11 +82,11 @@ CREATE TABLE IF NOT EXISTS `cupom` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.cupom: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.cupom: ~1 rows (aproximadamente)
 INSERT INTO `cupom` (`id`, `nome`, `desconto`) VALUES
 	(1, 'VITAO20', 20);
 
--- Copiando estrutura para tabela quaiat07_fws.despesas
+-- Copiando estrutura para tabela if0_41348689_fws.despesas
 CREATE TABLE IF NOT EXISTS `despesas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
@@ -99,13 +99,13 @@ CREATE TABLE IF NOT EXISTS `despesas` (
   CONSTRAINT `despesas_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.despesas: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.despesas: ~3 rows (aproximadamente)
 INSERT INTO `despesas` (`id`, `descricao`, `valor`, `data_despesa`, `tipo`, `categoria_id`) VALUES
 	(1, '', 100.00, '2025-12-05', 'luz', NULL),
 	(2, '', 700.00, '2025-12-02', 'luz', NULL),
 	(3, 'Refrigerador qubrou e necessitamos realizar uma manutenção.', 300.00, '2025-12-03', 'manutencao', NULL);
 
--- Copiando estrutura para tabela quaiat07_fws.expiracoes_pre_compras
+-- Copiando estrutura para tabela if0_41348689_fws.expiracoes_pre_compras
 CREATE TABLE IF NOT EXISTS `expiracoes_pre_compras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `expiracoes_pre_compras` (
   CONSTRAINT `fk_exp_venda` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.expiracoes_pre_compras: ~26 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.expiracoes_pre_compras: ~26 rows (aproximadamente)
 INSERT INTO `expiracoes_pre_compras` (`id`, `usuario_id`, `venda_id`, `data_expiracao`) VALUES
 	(8, 4, 11, '2025-10-30 14:06:14'),
 	(9, 4, 12, '2025-11-26 21:40:14'),
@@ -147,7 +147,7 @@ INSERT INTO `expiracoes_pre_compras` (`id`, `usuario_id`, `venda_id`, `data_expi
 	(37, 15, 74, '2025-12-31 00:10:03'),
 	(38, 14, 75, '2025-12-31 00:10:03');
 
--- Copiando estrutura para tabela quaiat07_fws.fornecedores
+-- Copiando estrutura para tabela if0_41348689_fws.fornecedores
 CREATE TABLE IF NOT EXISTS `fornecedores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `fornecedores` (
   UNIQUE KEY `cnpj` (`cnpj`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.fornecedores: ~22 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.fornecedores: ~22 rows (aproximadamente)
 INSERT INTO `fornecedores` (`id`, `nome`, `cnpj`, `telefone`, `email`) VALUES
 	(1, 'SR VINHO COMÉRCIO DE VINHOS E BEBIDAS LTDA', '24330541000146', '11947927600', 'contato@srvinhos.com.br'),
 	(2, 'MULT E DIGITAL COMERCIO DE PRODUTOS ALIMENTICIOS LTDA', '37885698000180', '1141310409', 'jocalbuquerque@bol.com.br'),
@@ -183,7 +183,7 @@ INSERT INTO `fornecedores` (`id`, `nome`, `cnpj`, `telefone`, `email`) VALUES
 	(21, 'UNILEVER BRASIL LTDA', '61068276000104', '1135688000', 'sac@ades.com.br'),
 	(22, 'LP COMERCIO DE SALGADOS LTDA', '24836224000104', '1138715778', 'legal@mwa.com.br');
 
--- Copiando estrutura para tabela quaiat07_fws.funcionarios
+-- Copiando estrutura para tabela if0_41348689_fws.funcionarios
 CREATE TABLE IF NOT EXISTS `funcionarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -199,11 +199,11 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.funcionarios: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.funcionarios: ~1 rows (aproximadamente)
 INSERT INTO `funcionarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nivel_permissao`, `criado_em`, `ultimo_login`, `ativo`) VALUES
 	(1, 'Mônica', '123.456.789-10', 'Monica@redecampeao.com.sp', '$2y$10$6hajNuGfFlg6txtji4XJ..HQCDtd.bonljgRVxPfqEE30GIOXNxIu', 3, '2025-08-13 13:43:01', '2026-02-15 02:31:49', 1);
 
--- Copiando estrutura para tabela quaiat07_fws.itens_vendidos
+-- Copiando estrutura para tabela if0_41348689_fws.itens_vendidos
 CREATE TABLE IF NOT EXISTS `itens_vendidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `venda_id` int(11) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `itens_vendidos` (
   CONSTRAINT `itens_vendidos_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.itens_vendidos: ~178 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.itens_vendidos: ~178 rows (aproximadamente)
 INSERT INTO `itens_vendidos` (`id`, `venda_id`, `produto_id`, `quantidade`, `preco_unitario`) VALUES
 	(2, 11, 15, 3, 3.50),
 	(3, 12, 18, 2, 9.99),
@@ -398,7 +398,7 @@ INSERT INTO `itens_vendidos` (`id`, `venda_id`, `produto_id`, `quantidade`, `pre
 	(199, 80, 27, 1, 5.50),
 	(200, 80, 86, 1, 2.99);
 
--- Copiando estrutura para tabela quaiat07_fws.lotes_produtos
+-- Copiando estrutura para tabela if0_41348689_fws.lotes_produtos
 CREATE TABLE IF NOT EXISTS `lotes_produtos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `produto_id` int(11) NOT NULL,
@@ -413,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `lotes_produtos` (
   CONSTRAINT `fk_lote_produto` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.lotes_produtos: ~165 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.lotes_produtos: ~165 rows (aproximadamente)
 INSERT INTO `lotes_produtos` (`id`, `produto_id`, `validade`, `quantidade`, `fornecedor_id`, `chegada`) VALUES
 	(17, 2, '2028-11-26', 0, 1, '2025-11-26'),
 	(19, 4, '2026-11-26', 5, 3, '2025-11-26'),
@@ -581,7 +581,7 @@ INSERT INTO `lotes_produtos` (`id`, `produto_id`, `validade`, `quantidade`, `for
 	(185, 41, '2027-02-15', 24, 11, '2026-02-15'),
 	(186, 4, '2027-02-15', 24, 3, '2026-02-15');
 
--- Copiando estrutura para tabela quaiat07_fws.movimentacao_estoque
+-- Copiando estrutura para tabela if0_41348689_fws.movimentacao_estoque
 CREATE TABLE IF NOT EXISTS `movimentacao_estoque` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `produto_id` int(11) NOT NULL,
@@ -597,7 +597,7 @@ CREATE TABLE IF NOT EXISTS `movimentacao_estoque` (
   CONSTRAINT `movimentacao_estoque_ibfk_2` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.movimentacao_estoque: ~242 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.movimentacao_estoque: ~242 rows (aproximadamente)
 INSERT INTO `movimentacao_estoque` (`id`, `produto_id`, `quantidade`, `tipo_movimentacao`, `data_movimentacao`, `descricao`, `venda_id`) VALUES
 	(1, 2, 15, 'entrada', '2025-11-23 10:53:42', NULL, NULL),
 	(2, 2, 24, 'entrada', '2025-12-04 10:56:10', NULL, NULL),
@@ -842,7 +842,7 @@ INSERT INTO `movimentacao_estoque` (`id`, `produto_id`, `quantidade`, `tipo_movi
 	(244, 20, 1, 'saida', '2026-02-15 02:47:40', NULL, 79),
 	(245, 6, 1, 'saida', '2026-02-15 02:47:47', NULL, 78);
 
--- Copiando estrutura para tabela quaiat07_fws.produtos
+-- Copiando estrutura para tabela if0_41348689_fws.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -864,7 +864,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   CONSTRAINT `produtos_ibfk_2` FOREIGN KEY (`fornecedor_id`) REFERENCES `fornecedores` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.produtos: ~84 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.produtos: ~84 rows (aproximadamente)
 INSERT INTO `produtos` (`id`, `nome`, `categoria_id`, `fornecedor_id`, `descricao`, `foto_produto`, `preco_venda`, `preco_compra`, `estoque`, `validade_padrao_meses`, `status`, `criado_em`) VALUES
 	(1, 'VINHO MALBEC 750ML', 1, 1, 'Um vinho Malbec elegante, produzido com uvas selecionadas que garantem sabor intenso, aromas frutados e taninos suaves. Ideal para acompanhar carnes vermelhas e momentos especiais.', '/fws/IMG_Produtos/1.png', 69.90, 54.90, 32, 36, 'ativo', '2025-10-20 17:54:49'),
 	(2, 'VINHO DE LOS MAN CABERNET SAUVIGNON BRANCO 750ML', 1, 1, 'Vinho Cabernet Sauvignon, disponível nas versões branco ou tinto, feito com uvas premium que trazem equilíbrio entre acidez e corpo, perfeito para harmonizar com queijos e pratos sofisticados.', '/fws/IMG_Produtos/2.png', 69.90, 54.90, 41, 36, 'ativo', '2025-10-20 17:54:49'),
@@ -951,7 +951,7 @@ INSERT INTO `produtos` (`id`, `nome`, `categoria_id`, `fornecedor_id`, `descrica
 	(87, 'PRINGLES ORIGINAL 104G', 6, 3, 'Batata chips icônica, com textura crocante e sabor leve e irresistível. Vem na embalagem em tubo, que mantém as batatas sempre sequinhas e inteiras. Ideal para petiscar a qualquer hora, compartilhar com amigos ou acompanhar filmes e jogos.', '/fws/IMG_Produtos/87.png', 20.00, 13.00, 25, 8, 'ativo', '2025-12-09 12:32:45'),
 	(88, 'Doritos', 6, 3, 'Tortilhas crocantes com o equilíbrio perfeito entre o doce e o picante. O Doritos Sweet Chilli combina sabor intenso, textura marcante e aquele toque levemente apimentado que fica na boca. Embalagem de 75g, ideal para lanche individual, compartilhar ou acompanhar filmes e encontros com amigos.', '/fws/IMG_Produtos/88.png', 14.00, 10.00, 40, 12, 'inativo', '2025-12-09 17:04:25');
 
--- Copiando estrutura para tabela quaiat07_fws.retiradas
+-- Copiando estrutura para tabela if0_41348689_fws.retiradas
 CREATE TABLE IF NOT EXISTS `retiradas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `produto_id` int(11) NOT NULL,
@@ -970,7 +970,7 @@ CREATE TABLE IF NOT EXISTS `retiradas` (
   CONSTRAINT `retiradas_ibfk_3` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.retiradas: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.retiradas: ~10 rows (aproximadamente)
 INSERT INTO `retiradas` (`id`, `produto_id`, `usuario_id`, `funcionario_id`, `quantidade`, `data_retirada`, `tipo_motivo`, `motivo`) VALUES
 	(1, 1, NULL, 1, 1, '2025-12-05 09:58:24', 'uso_interno', 'Retirada via Estoque'),
 	(2, 1, NULL, 1, 1, '2025-12-05 10:01:58', 'roubo', NULL),
@@ -983,7 +983,7 @@ INSERT INTO `retiradas` (`id`, `produto_id`, `usuario_id`, `funcionario_id`, `qu
 	(9, 39, NULL, 1, 1, '2025-12-07 00:08:24', 'doacao', NULL),
 	(10, 84, NULL, 1, 90, '2025-12-09 09:36:50', 'outros', NULL);
 
--- Copiando estrutura para tabela quaiat07_fws.usuarios
+-- Copiando estrutura para tabela if0_41348689_fws.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -1002,7 +1002,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `telefone` (`telefone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.usuarios: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.usuarios: ~11 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `nome`, `data_nascimento`, `telefone`, `cpf`, `email`, `senha`, `criado_em`, `ultimo_login`, `ativo`, `google_id`) VALUES
 	(4, 'NIKOLAS', '2007-01-09', '(11) 96854-4147', '47944286858', 'nikolas.souzalima007@gmail.com', '$2y$10$DN2sT4jhtzeogW.CVlBzb.Y2s0n.6pp3tswHQb.R7yXe2eLg43ZFq', '2025-10-20 23:59:00', '2025-12-31 00:09:54', 0, NULL),
 	(6, 'Sabrina', '2007-02-14', '11930265543', '54449709888', 'sabrina@gmail.com', '$2y$10$xVCz9nu7WWZVB25HuJQAJuVeIWKOMuqMtlEP68.sorCERfJ7LVO9.', '2025-10-22 11:30:07', '2025-10-22 08:32:23', 1, NULL),
@@ -1016,7 +1016,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `data_nascimento`, `telefone`, `cpf`, `ema
 	(15, 'Carlos', '2005-12-25', '(11) 95349-4649', '12780544309', 'alves@gmail.com', '$2y$10$YwmXsr2g.p.zUBLww.W3TuUyzT0SwksVFLMEomrQzY05a6uOAnK8y', '2025-12-09 17:00:24', '2025-12-09 14:00:45', 1, NULL),
 	(16, 'Ricardo Silva', '2000-03-29', '11983493280', '87496903027', 'Ricardo@gmail.com', '$2y$10$Msh0B2RkeCkolNtWHQJ3Pu0Hzb5DesC.qevGb8b7BCZ4JlIHklUNm', '2026-02-15 05:28:41', '2026-02-15 02:29:56', 1, NULL);
 
--- Copiando estrutura para tabela quaiat07_fws.vendas
+-- Copiando estrutura para tabela if0_41348689_fws.vendas
 CREATE TABLE IF NOT EXISTS `vendas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `funcionario_id` int(11) NOT NULL,
@@ -1035,7 +1035,7 @@ CREATE TABLE IF NOT EXISTS `vendas` (
   CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela quaiat07_fws.vendas: ~52 rows (aproximadamente)
+-- Copiando dados para a tabela if0_41348689_fws.vendas: ~52 rows (aproximadamente)
 INSERT INTO `vendas` (`id`, `funcionario_id`, `usuario_id`, `total`, `situacao_compra`, `metodo_pagamento`, `tempo_chegada`, `data_criacao`, `data_finalizacao`, `tempo_adicionado`) VALUES
 	(11, 1, 4, 10.50, 'cancelada', 'dinheiro', '00:45:00', '2025-10-30 11:05:40', NULL, NULL),
 	(12, 1, 4, 54.48, 'cancelada', 'dinheiro', '00:45:00', '2025-11-26 18:39:32', NULL, NULL),
@@ -1090,20 +1090,14 @@ INSERT INTO `vendas` (`id`, `funcionario_id`, `usuario_id`, `total`, `situacao_c
 	(79, 1, 16, 9.99, 'finalizada', 'cartao_credito', '00:45:00', '2026-02-15 02:43:14', '2026-02-15 02:47:40', 'S'),
 	(80, 1, 16, 8.49, 'finalizada', 'cartao_debito', '00:45:00', '2026-02-15 02:46:03', '2026-02-15 02:47:27', 'S');
 
--- Copiando estrutura para trigger quaiat07_fws.trg_nao_cancelar_finalizada
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-DELIMITER //
-CREATE TRIGGER `trg_nao_cancelar_finalizada` BEFORE UPDATE ON `vendas` FOR EACH ROW BEGIN
-    IF OLD.situacao_compra = 'finalizada' AND NEW.situacao_compra = 'cancelada' THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Não é possível cancelar uma venda finalizada';
-    END IF;
-END//
-DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
+-- CÓDIGO DA TRIGGER FOI REMOVIDO AQUI
+-- Plataformas gratuitas como o InfinityFree não concedem permissão de criação de TRIGGER.
+-- Para o ambiente web/produção, a regra de não cancelar vendas finalizadas deve 
+-- ser validada diretamente pelo PHP/Back-end.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+SET FOREIGN_KEY_CHECKS = 1;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
